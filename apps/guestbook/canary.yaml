@@ -1,0 +1,24 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: guestbook-ui
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: guestbook-ui
+  service:
+    port: 80
+  analysis:
+    interval: 30s
+    threshold: 5
+    maxWeight: 50
+    stepWeight: 10
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: 99
+    - name: request-duration
+      thresholdRange:
+        max: 500

@@ -4,6 +4,8 @@ metadata:
   name: guestbook-ui
   namespace: default
 spec:
+  provider: prometheus  # Tell Flagger to use Prometheus
+  metricsServer: http://prometheus.monitoring:9090  # Where to find it
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
